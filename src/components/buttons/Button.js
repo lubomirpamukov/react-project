@@ -1,4 +1,5 @@
-import PropTypes from "prop-types";
+import className from "classnames";
+import { twMerge } from "tailwind-merge";
 
 const Button = ({
   children,
@@ -9,10 +10,26 @@ const Button = ({
   danger,
   outline,
   rounded,
+  ...rest
 }) => {
-  return <button className="text-red-900 border-2 p-2 bg-amber-300 mb-2 rounded-xl
+  const buttonClassName = twMerge(
+    className(rest.className, 'flex flex-center gap-1 px-3 py-1.5 border-2', {
+    'border-blue-500 bg-blue-500 text-white': primary,
+    'border-gray-900 bg-gray-900 text-white': secondary,
+    'border-green-500 bg-green-500 text-white': success,
+    'border-yellow-500 bg-yellow-500 text-white': warning,
+    'border-red-500 bg-red-500 text-white': danger,
+    'rounded-full': rounded,
+    'bg-white': outline,
+    'text-blue-500': outline && primary,
+    'text-gray-900': outline && secondary,
+    'text-green-500': outline && success,
+    'text-yellow-500': outline && warning,
+    'text-red-500': outline && danger,
+  }))
 
-uu">{children}</button>;
+   
+  return <button {...rest}  className={buttonClassName}>{children}</button>;
 };
 
 Button.propTypes = {
