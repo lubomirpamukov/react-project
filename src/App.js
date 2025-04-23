@@ -1,61 +1,26 @@
-import Button2 from "./components/buttons/Button2";
-import { GoPlug, GoRepoForked, GoSquirrel } from "react-icons/go";
-import "./App.css";
+import Accordion from "./components/Accordion";
 
+const App = () => {
 
-function App() {
-  const handleClick = () => {
-    console.log("Button clicked");
-  };
+  const items = [
+    {
+      id: "1",
+      label: "Item 1",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      id: "2",
+      label: "Item 2",
+      content: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    },
+    {
+      id: "3",
+      label: "Item 3",
+      content: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+    }
+  ]
 
-  const handleMouseOver = () => {
-    console.log("Mouse over button");
-  };
-
-  return (
-    <div className="flex flex-col gap-2">
-      <div>
-        <Button2 onClick={handleClick} secondary>
-          Click now
-          <GoPlug className="text-2xl" />
-        </Button2>
-      </div>
-      <div>
-        <Button2 primary>
-          Sale
-          <GoRepoForked className="text-xl" />
-        </Button2>
-      </div>
-      <div>
-        <Button2 onMouseOver={handleMouseOver} warning>
-          Cancel
-          <GoSquirrel className="text-xl" />
-        </Button2>
-      </div>
-      <div>
-        <Button2 danger>Remove</Button2>
-      </div>
-      <div>
-        <Button2 success>Edit</Button2>
-      </div>
-      <div>
-        <Button2 primary rounded outline>
-          Click me
-        </Button2>
-      </div>
-      <div>
-        <Button2 danger outline rounded>
-          Edit
-        </Button2>
-      </div>
-      <div>
-        <Button2 success>Edit</Button2>
-      </div>
-      <div>
-        <Button2 success>Edit</Button2>
-      </div>
-    </div>
-  );
+  return <Accordion items={items} />;
 }
 
 export default App;
