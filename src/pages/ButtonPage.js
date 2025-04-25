@@ -1,6 +1,5 @@
 import Button2 from "../components/buttons/Button2";
 import { GoPlug, GoRepoForked, GoSquirrel } from "react-icons/go";
-import "./App.css";
 
 
 function ButtonPage() {
@@ -9,7 +8,6 @@ function ButtonPage() {
   };
 
   const handleMouseOver = () => {
-    console.log("Mouse over button");
   };
 
   return (
