@@ -5,6 +5,7 @@ import ButtonPage from "./pages/ButtonPage";
 import Sidebar from "./components/Sidebar";
 import ModalPage from "./pages/ModalPage";
 import TablePage from "./pages/TablePage";
+import CounterPage from "./pages/CounterPage"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path={"/buttons"} children={<ButtonPage />} />
         <Route path={"/modal"} children={<ModalPage />} />
         <Route path={"/table"} children={<TablePage />} />
+        <Route path={"/counter"} children={<CounterPage initialCount={10} />} />
       </div>
     </div>
   );
