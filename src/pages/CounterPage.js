@@ -1,32 +1,75 @@
 import Button from "../components/buttons/Button2";
-import { useState } from "react";
+import { useReducer } from "react";
 import Panel from "../components/Panel";
 
+const INCREMENT_COUNT = 'increment';
+const DECREMENT_COUNT = 'decrement';
+const SET_VALUE_TO_ADD = 'set-value-to-add';
+const ADD_VALUE = 'add-value';
+
+function reducer(state,action){
+
+  switch(action.type){
+    case INCREMENT_COUNT:
+      return {
+        ...state,
+        count: state.count + 1
+      };
+    case DECREMENT_COUNT:
+      return{
+        ...state,
+        count: state.count - 1
+      };
+    case SET_VALUE_TO_ADD:
+      return{
+        ...state,
+        value: state.value = action.payload
+      };
+    case ADD_VALUE:
+      return{
+        count: state.count + state.value,
+        value: 0
+      }
+    default:
+      throw new Error("invalid action type: " + action.type)
+  }
+}
+
 function CounterPage({ initialCount }) {
-  const [count, setCount] = useState(initialCount);
-  const [value, setValue] = useState(0);
+  const [state, dispatch] = useReducer(reducer,{
+    count: 0,
+    value: 0
+  })
 
   const increment = () => {
-    setCount((prev) => prev + 1);
+    dispatch({
+      type: INCREMENT_COUNT
+    })
   };
 
   const decrement = () => {
-    setCount((prev) => prev - 1);
+    dispatch({
+      type: DECREMENT_COUNT
+    })
   };
 
   const handleChange = (event) => {
-    setValue(Number(event.target.value));
+    dispatch({
+      type: SET_VALUE_TO_ADD,
+      payload: Number(event.target.value)
+    })
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setCount((prev) => prev + value);
-    setValue(0);
+    dispatch({
+      type: ADD_VALUE,
+    })
   }
 
   return (
     <Panel className="relative">
-      <h1>Count is {count}</h1>
+      <h1>Count is {state.count}</h1>
       <Button className="rounded-lg" success onClick={increment}>
         Increment
       </Button>
@@ -46,7 +89,7 @@ function CounterPage({ initialCount }) {
             id="add-a-lot"
             type="number"
             onChange={() => handleChange(event)}
-            value={value || ""}
+            value={state.value || ""}
           ></input>
         </label>
         <Button className="rounded-lg" primary outline>
